@@ -15,18 +15,18 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
 - [ ] In `readme.md`: list a name and description for all features (minimum 6 for full points) you intend to include in your app (in future units, you will check off features as you complete them and add GIFs demonstrating the features)
 - [ ] In `planning/user_stories.md`: add all user stories (minimum 10 for full points)
 - [ ] In `planning/user_stories.md`: use 1-3 unique user roles in your user stories
-- [ ] In this document, complete all thre questions in the **Reflection** section below
+- [x] In this document, complete all thre questions in the **Reflection** section below
 
 ## Reflection
 
 ### 1. What went well during this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+What went well during this unit was that that our group was able to brainstorm easily. We were able to share our ideas without any tension between group members. It was easy to voice suggestions and improvements. 
 
 ### 2. What were some challenges your group faced in this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+One challenge that our group faced in this unit was settling on an intial idea. We each had ideas that were either broad or that we weren't sure how practical they would be to implement. We had to collaborate and build off of one another's ideas to come to a final decision. 
 
 ### 3. What additional support will you need in upcoming units as you continue to work on your final project?
 
-[👉🏾👉🏾👉🏾 your answer here]
+One of the features of our app involves uploading files. We have some ideas on how to implement it but may need some support on what the best approach would be. 
