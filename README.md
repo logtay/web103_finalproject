@@ -1,4 +1,5 @@
 # [your app name here]
+Cherished
 
 CodePath WEB103 Final Project
 
@@ -7,10 +8,11 @@ Designed and developed by: Isabella Mitchell, Taylor Femat
 🔗 Link to deployed app:
 
 ## About
+A website where you can store and relive beloved memories of your loved ones. 
 
 ### Description and Purpose
 
-[text goes here]
+Meant to store videos/pictures of loved ones throughout the years. It's easy to lose track of information throughout the years or lose storage trying to retain them all.
 
 ### Inspiration
 
@@ -18,9 +20,9 @@ Designed and developed by: Isabella Mitchell, Taylor Femat
 
 ## Tech Stack
 
-Frontend:
+Frontend: React
 
-Backend:
+Backend: PostgreSQL, and Node.js
 
 ## Features
 
