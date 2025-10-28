@@ -18,31 +18,47 @@ Designed and developed by: Isabella Mitchell, Taylor Femat
 
 ## Tech Stack
 
-Frontend:
+Frontend: React
 
-Backend:
+Backend: Node, Express, PostgreSQL
 
 ## Features
 
-### [Name of Feature 1]
+### Add a new Memory
 
 [short description goes here]
 
 [gif goes here]
 
-### [Name of Feature 2]
+### View all memories
 
 [short description goes here]
 
 [gif goes here]
 
-### [Name of Feature 3]
+### Delete a memory
 
 [short description goes here]
 
 [gif goes here]
 
-### [ADDITIONAL FEATURES GO HERE - ADD ALL FEATURES HERE IN THE FORMAT ABOVE; you will check these off and add gifs as you complete them]
+### Edit a memory
+
+[short description goes here]
+
+[gif goes here]
+
+### Tag and filter memories
+
+[short description goes here]
+
+[gif goes here]
+
+### Error handling and input validation
+
+[short description goes here]
+
+[gif goes here]
 
 ## Installation Instructions
 
