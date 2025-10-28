@@ -21,30 +21,47 @@ Meant to store videos/pictures of loved ones throughout the years. It's easy to 
 ## Tech Stack
 
 Frontend: React
+Frontend: React
 
 Backend: PostgreSQL, and Node.js
 
 ## Features
 
-### [Name of Feature 1]
+### Add a new memory
 
-[short description goes here]
-
-[gif goes here]
-
-### [Name of Feature 2]
-
-[short description goes here]
+The user can create a new memory that they would like to save. They can add various details such as: title, the loved one's name the memory is related to, date, description, and an image or audio file. 
 
 [gif goes here]
 
-### [Name of Feature 3]
+### View all memories
 
-[short description goes here]
+The user can view a feed of all the memories that they have added so far. Each memory will show a brief preview, that the user can then get more details from. 
 
 [gif goes here]
 
-### [ADDITIONAL FEATURES GO HERE - ADD ALL FEATURES HERE IN THE FORMAT ABOVE; you will check these off and add gifs as you complete them]
+### Delete a memory
+
+If a user no longer wishes to keep a memory, they can delete it and the change is immediately shown in the interface.
+
+[gif goes here]
+
+### Edit a memory
+
+Users can update or change any details of a memory that they have already created. 
+
+[gif goes here]
+
+### Tag and filter memories
+
+Users can add tags to their memories to help categorize them. They can filter by these tags in order to view related posts. 
+
+[gif goes here]
+
+### Error handling and input validation
+
+The app displays error messages if the user has made a mistake while completing their form fields. Proper form validation helps to ensure appropriate data is submitted. 
+
+[gif goes here]
 
 ## Installation Instructions
 
