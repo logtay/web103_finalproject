@@ -1,5 +1,5 @@
-# [your app name here]
-Cherished
+# Cherished
+
 
 CodePath WEB103 Final Project
 
