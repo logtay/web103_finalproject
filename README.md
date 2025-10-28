@@ -16,11 +16,11 @@ Meant to store videos/pictures of loved ones throughout the years. It's easy to 
 
 ### Inspiration
 
-[text goes here]
+It was inspired by the personal experience of looking back in older memories through phones and wishing we had more storage to keep them and as it's easy to lose track of them due to time and finding the exact related memory due to lack of tags phones typically have when navigating.
 
 ## Tech Stack
 
-Frontend: React
+
 Frontend: React
 
 Backend: PostgreSQL, and Node.js
