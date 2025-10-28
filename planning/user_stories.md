@@ -17,3 +17,6 @@ Memory Keeper: a user who wants to save and organize memories of their loved one
 5. As a memory keeper, I want to be able to filter my memories by tag, so that I can easily find memories of a certain category.
 6. As a memory keeper, I want to be able to update a memory, so that I can change their description or change previous details.
 7. As a memory keeper, I want to be able to delete a memory so that I can remove any I no longer want to have.
+8. As a memory keeper, I want to upload and view photos or audio files, so that I can see and hear my loved ones.
+9. As a memory keeper, I want to view the time each memory was created, so that I can organize memories by time they were made.
+10. As a memory keeper, I want to be able to download my media files, so that I can have personal offline copies.
