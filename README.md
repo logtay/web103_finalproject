@@ -24,39 +24,39 @@ Backend: Node, Express, PostgreSQL
 
 ## Features
 
-### Add a new Memory
+### Add a new memory
 
-[short description goes here]
+The user can create a new memory that they would like to save. They can add various details such as: title, the loved one's name the memory is related to, date, description, and an image or audio file. 
 
 [gif goes here]
 
 ### View all memories
 
-[short description goes here]
+The user can view a feed of all the memories that they have added so far. Each memory will show a brief preview, that the user can then get more details from. 
 
 [gif goes here]
 
 ### Delete a memory
 
-[short description goes here]
+If a user no longer wishes to keep a memory, they can delete it and the change is immediately shown in the interface.
 
 [gif goes here]
 
 ### Edit a memory
 
-[short description goes here]
+Users can update or change any details of a memory that they have already created. 
 
 [gif goes here]
 
 ### Tag and filter memories
 
-[short description goes here]
+Users can add tags to their memories to help categorize them. They can filter by these tags in order to view related posts. 
 
 [gif goes here]
 
 ### Error handling and input validation
 
-[short description goes here]
+The app displays error messages if the user has made a mistake while completing their form fields. Proper form validation helps to ensure appropriate data is submitted. 
 
 [gif goes here]
 
