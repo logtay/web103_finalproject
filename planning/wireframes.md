@@ -4,10 +4,10 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## List of Pages
 
-Home Feed ⭐
-Create a Memory ⭐
-Edit/Delete a Memory
-Memory Detail Page ⭐
+- Home Feed ⭐
+- Create a Memory ⭐
+- Edit/Delete a Memory
+- Memory Detail Page ⭐
 
 
 ## Wireframe 1: Home Feed
