@@ -4,17 +4,21 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## List of Pages
 
-[👉🏾👉🏾👉🏾 List the pages you expect to have in your app, with a ⭐ next to pages you have wireframed]
+Home Feed ⭐
+Create a Memory ⭐
+Edit/Delete a Memory
+Memory Detail Page ⭐
 
-## Wireframe 1: [page title]
+
+## Wireframe 1: Home Feed
 
 [👉🏾👉🏾👉🏾 include wireframe 1]
 
-## Wireframe 2: [page title]
+## Wireframe 2: Create a new Memory
 
 [👉🏾👉🏾👉🏾 include wireframe 2]
 
-## Wireframe 3: [page title]
+## Wireframe 3: Memory Detail Page
 
 [👉🏾👉🏾👉🏾 include wireframe 3]
 
