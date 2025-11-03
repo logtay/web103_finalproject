@@ -12,11 +12,11 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## Wireframe 1: Home Feed
 
-[👉🏾👉🏾👉🏾 include wireframe 1]
+<img src="https://github.com/logtay/web103_finalproject/blob/main/ViewFeedWireframe.jpg" width="600">
 
 ## Wireframe 2: Create a new Memory
 
-[👉🏾👉🏾👉🏾 include wireframe 2]
+<img src="https://github.com/logtay/web103_finalproject/blob/main/CreateNewWireframe.jpg?raw=true" width="600">
 
 ## Wireframe 3: Memory Detail Page
 
