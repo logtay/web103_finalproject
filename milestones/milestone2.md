@@ -12,18 +12,18 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
   - [ ] Your entity relationship diagram should include the tables in your database.
 - [x] Prepare your three-minute pitch presentation, to be presented during Unit 7 (the next unit).
   - [x] You do **not** need to submit any materials in advance of your pitch.
-- [ ] In this document, complete all three questions in the **Reflection** section below
+- [x] In this document, complete all three questions in the **Reflection** section below
 
 ## Reflection
 
 ### 1. What went well during this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+We were able to divide up the work early in the process so everyone knew what they had to do. 
 
 ### 2. What were some challenges your group faced in this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+It was hard to coordinate across different time zones and we also have other responsibilities that we have to take care of.
 
 ### 3. What additional support will you need in upcoming units as you continue to work on your final project?
 
-[👉🏾👉🏾👉🏾 your answer here]
+We will need support on the most efficient way to deal with users and straightforward method for media uploads. 
