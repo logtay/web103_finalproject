@@ -3,7 +3,8 @@
 Reference the Creating an Entity Relationship Diagram final project guide in the course portal for more information about how to complete this deliverable.
 
 ## List of Pages
-
+- Add User
+- User Login
 - Home Feed ⭐
 - Create a Memory ⭐
 - Edit/Delete a Memory
@@ -20,6 +21,6 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## Wireframe 3: Memory Detail Page
 
-[👉🏾👉🏾👉🏾 include wireframe 3]
+<img src="https://github.com/logtay/web103_finalproject/blob/main/DetailViewWireframe.jpg?raw=true" width="600">
 
 [👉🏾👉🏾👉🏾 include more wireframes as desired]
