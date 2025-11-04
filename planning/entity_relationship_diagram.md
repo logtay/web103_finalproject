@@ -4,11 +4,12 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## Create the List of Tables
 
-[👉🏾👉🏾👉🏾 List each table in your diagram]
+users, memories, tags, memoryTags
 
 ## Add the Entity Relationship Diagram
 
-[👉🏾👉🏾👉🏾 Include an image or images of the diagram below. You may also wish to use the following markdown syntax to outline each table, as per your preference.]
+
+<img src="../ERD.png" width="600">
 
 | Column Name | Type | Description |
 |-------------|------|-------------|
