@@ -7,6 +7,10 @@ const config = {
   host: process.env.PGHOST,
   port: process.env.PGPORT,
   database: process.env.PGDATABASE,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 };
 
-export default pool = new pg.Pool(config);
+const pool = new pg.Pool(config);
+export default pool;
