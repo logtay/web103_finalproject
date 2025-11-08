@@ -44,7 +44,7 @@ async function createTagTable() {
     await pool.query(`
       CREATE TABLE tags (
         id SERIAL PRIMARY KEY,
-        name VARCHAR(127) NOT NULL,
+        name VARCHAR(127) UNIQUE NOT NULL,
         created_at TIMESTAMP NOT NULL DEFAULT NOW()
       )
     `);
@@ -59,11 +59,10 @@ async function createMemoryTagTable() {
     await pool.query("DROP TABLE IF EXISTS memorytags CASCADE");
     await pool.query(`
       CREATE TABLE memorytags (
-        user_id INTEGER NOT NULL,
         memory_id INTEGER REFERENCES memories(id) ON DELETE CASCADE,
         tag_id INTEGER REFERENCES tags(id) ON DELETE CASCADE,
         created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-        PRIMARY KEY (user_id, memory_id, tag_id)
+        PRIMARY KEY (memory_id, tag_id)
       )
     `);
     console.log("✅ MemoryTags table reset successfully.");
