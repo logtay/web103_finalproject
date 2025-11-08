@@ -1,5 +1,6 @@
 import "./App.css";
-import { Link, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import ReadMemories from "./pages/ReadMemories";
 import CreateMemory from "./pages/CreateMemory";
 import MemoryDetail from "./pages/MemoryDetail";
@@ -14,16 +15,13 @@ function App() {
     { path: "/memory/:id", element: <MemoryDetail /> },
     { path: "/memory/:id/edit", element: <EditMemory /> },
     { path: "/login", element: <Login /> },
-    {path: "/register" , element: <Register /> }
+    { path: "/register", element: <Register /> },
   ]);
 
   return (
     <div className="App">
-      <div className="header">
-        <Link to="/">Memories</Link>
-        <Link to="/memory/new">Add Memory</Link>
-    </div>
-    {element}
+      <Navbar />
+      {element}
     </div>
   );
 }
