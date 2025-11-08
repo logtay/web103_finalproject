@@ -13,14 +13,14 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## Wireframe 1: Home Feed
 
-<img src="https://github.com/logtay/web103_finalproject/blob/main/ViewFeedWireframe.jpg" width="600">
+<img src="https://github.com/logtay/web103_finalproject/blob/main/wireframes/ViewFeedWireframe.jpg" width="600">
 
 ## Wireframe 2: Create a new Memory
 
-<img src="https://github.com/logtay/web103_finalproject/blob/main/CreateNewWireframe.jpg?raw=true" width="600">
+<img src="https://github.com/logtay/web103_finalproject/blob/main/wireframes/CreateNewWireframe.jpg?raw=true" width="600">
 
 ## Wireframe 3: Memory Detail Page
 
-<img src="https://github.com/logtay/web103_finalproject/blob/main/DetailViewWireframe.jpg?raw=true" width="600">
+<img src="https://github.com/logtay/web103_finalproject/blob/main/wireframes/DetailViewWireframe.jpg?raw=true" width="600">
 
 [👉🏾👉🏾👉🏾 include more wireframes as desired]
