@@ -27,17 +27,22 @@ const EditMemory = () => {
     }
   }, [id, location.state]);
 
+  // Function to update the memory
   const updateMemory = async (formData) => {
-    await MemoryAPI.updateMemory(
-      formData.title,
-      formData.description,
-      formData.date,
-      formData.lovedOnes,
-      formData.tags,
-      formData.media
-    );
+    try {
+      await MemoryAPI.updateMemory(
+        formData.title,
+        formData.description,
+        formData.date,
+        formData.lovedOnes,
+        formData.tags,
+        formData.media
+      );
 
-    navigate(`/memory/:${id}`);
+      navigate(`/memory/:${id}`);
+    } catch (error) {
+      console.log("Error updating:", error);
+    }
   };
   return (
     <MemoryForm

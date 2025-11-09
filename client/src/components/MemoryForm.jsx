@@ -56,6 +56,7 @@ const MemoryForm = ({ title, initData, onSubmit, submitLabel }) => {
     }),
   };
 
+  // Function to submit the form
   const submitForm = async (event) => {
     event.preventDefault();
     // Check input

@@ -5,17 +5,22 @@ import MemoryAPI from "../services/MemoryAPI.js";
 const CreateMemory = () => {
   const navigate = useNavigate();
 
+  // Function to upload the memory to the database
   const uploadMemory = async (formData) => {
-    await MemoryAPI.createMemory(
-      formData.title,
-      formData.description,
-      formData.date,
-      formData.lovedOnes,
-      formData.tags,
-      formData.media
-    );
+    try {
+      await MemoryAPI.createMemory(
+        formData.title,
+        formData.description,
+        formData.date,
+        formData.lovedOnes,
+        formData.tags,
+        formData.media
+      );
 
-    navigate("/");
+      navigate("/");
+    } catch (error) {
+      console.log("Error uploading:", error);
+    }
   };
   return (
     <MemoryForm
