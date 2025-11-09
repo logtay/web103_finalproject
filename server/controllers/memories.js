@@ -1,6 +1,6 @@
 import { pool }  from "../config/database.js";
 
-const createMemory = async (req, res) => {
+const createMemories = async (req, res) => {
   try {
     const { title, body, user_id, loved_one, filePath } = req.body;
 
@@ -18,7 +18,7 @@ const createMemory = async (req, res) => {
     res.status(409).json({ error: error.message });
   }
 }
-const getMemory = async (req, res) => {
+const getMemories = async (req, res) => {
   try {
     const results = await pool.query('SELECT * FROM memories ORDER BY created_at DESC');
     res.status(200).json(results.rows);
@@ -27,12 +27,12 @@ const getMemory = async (req, res) => {
   }
 }
 
-const updateMemory = async (req, res) => {
+const updateMemories = async (req, res) => {
   try {
       const id = parseInt(req.params.id)
       const { title, body, user_id, loved_one, filePath } = req.body
       const results = await pool.query(`
-          UPDATE memories SET title = $1, body = $2, user_id= $3, loved_one = $4,  filePath = $5, WHERE id = $6
+          UPDATE memories SET title = $1, body = $2, user_id= $3, loved_one = $4,  filePath = $5 WHERE id = $6
           RETURNING *`,
           [title, body, user_id, loved_one, filePath, id]
       )
@@ -45,7 +45,7 @@ const updateMemory = async (req, res) => {
     }
 }
 
-const deleteMemory = async (req, res) => {
+const deleteMemories = async (req, res) => {
   try {
       const id = parseInt(req.params.id)
       const results = await pool.query('DELETE FROM memories WHERE id = $1 RETURNING *', [id])
@@ -68,4 +68,4 @@ const getMemoryById = async (req, res) => {
   }
 }
 
-export default { createMemory, getMemory, updateMemory, deleteMemory, getMemoryById };
+export default { createMemories, getMemories, updateMemories, deleteMemories, getMemoryById };

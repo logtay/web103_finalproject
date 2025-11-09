@@ -5,8 +5,8 @@ const router = express.Router()
 
 router.get('/', MemoryController.getMemories)
 router.get('/:id', MemoryController.getMemoryById)
-router.post('/', MemoryController.createMemory)
-router.put('/:id', MemoryController.updateMemory)
-router.delete('/:id', MemoryController.deleteMemory)
+router.post('/', MemoryController.createMemories)
+router.put('/:id', MemoryController.updateMemories)
+router.delete('/:id', MemoryController.deleteMemories)
 
 export default router
