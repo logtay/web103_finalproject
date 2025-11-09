@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import usersRouter from "./routes/users.js";
 import tagsRouter from "./routes/tags.js";
+import memoriesRouter from "./routes/memories.js";
   
 const app = express();
 
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
 });
 app.use("/users", usersRouter);
 app.use("/tags", tagsRouter);
+app.use("/memories", memoriesRouter);
 
 const PORT = 3001;
 
