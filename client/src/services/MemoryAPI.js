@@ -1,3 +1,13 @@
+async function getMemory(id) {
+  try {
+    const response = await fetch(`/api/memory/${id}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(`Error fetching memory: ${error}`);
+  }
+}
+
 async function createMemory(title, description, date, lovedOnes, tags, media) {
   try {
     const formData = new FormData();
@@ -19,4 +29,25 @@ async function createMemory(title, description, date, lovedOnes, tags, media) {
   }
 }
 
-export default { createMemory };
+async function updateMemory(title, description, date, lovedOnes, tags, media) {
+  try {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("date", date);
+    formData.append("lovedOnes", JSON.stringify(lovedOnes));
+    formData.append("tags", JSON.stringify(tags));
+    formData.append("media", media);
+    const options = {
+      method: "PATCH",
+      body: formData,
+    };
+    const response = await fetch("/api/memory", options);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(`Error updating memory: ${error}`);
+  }
+}
+
+export default { getMemory, createMemory, updateMemory };

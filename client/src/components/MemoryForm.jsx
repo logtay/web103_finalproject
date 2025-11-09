@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import CreatableSelect from "react-select/creatable";
 
-const MemoryForm = ({ initData, onSubmit }) => {
+const MemoryForm = ({ title, initData, onSubmit, submitLabel }) => {
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
     useDropzone({
       accept: { "image/*": [] },
@@ -80,7 +80,7 @@ const MemoryForm = ({ initData, onSubmit }) => {
         className="create-memory-form"
         onSubmit={(event) => submitForm(event)}
       >
-        <h2 id="memory-form-title">Upload your memories</h2>
+        <h2 id="memory-form-title">{title}</h2>
         <div
           {...getRootProps()}
           className={`file-drop-zone ${isDragActive ? "active" : ""}`}
@@ -161,7 +161,7 @@ const MemoryForm = ({ initData, onSubmit }) => {
           }
         />
         <button id="upload-button" type="onSubmit">
-          Upload Memory
+          {submitLabel}
         </button>
       </form>
     </div>

@@ -19,6 +19,7 @@ const CreateMemory = () => {
   };
   return (
     <MemoryForm
+      title="Upload your memories"
       initData={{
         title: "",
         description: "",
@@ -27,6 +28,7 @@ const CreateMemory = () => {
         tags: [],
       }}
       onSubmit={uploadMemory}
+      submitLabel={"Upload Memory"}
     />
   );
 };
