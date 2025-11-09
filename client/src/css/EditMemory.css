@@ -1,0 +1,18 @@
+#remove-button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 1rem;
+  width: fit-content;
+  margin: 1rem auto 0 auto;
+  color: white;
+  background-color: rgb(255, 58, 58);
+}
+
+#remove-button:hover {
+  background-color: rgb(218, 34, 34);
+  color: rgb(225, 225, 225);
+  cursor: pointer;
+}

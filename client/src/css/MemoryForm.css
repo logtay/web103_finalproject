@@ -72,16 +72,24 @@
   background-color: rgb(210, 210, 210);
 }
 
+.memory-form-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+}
+
 #upload-button {
   padding: 0.5rem 1rem;
-  color: rgb(40, 68, 134);
-  background-color: white;
   border: 2px solid black;
   border-radius: 8px;
   font-size: 1rem;
   margin-top: 1rem;
   width: fit-content;
   margin: 1rem auto 0 auto;
+  color: rgb(40, 68, 134);
+  background-color: white;
+  flex: 1;
 }
 
 #upload-button:hover {

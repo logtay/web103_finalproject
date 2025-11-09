@@ -1,0 +1,19 @@
+#home-button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 1rem;
+  width: fit-content;
+  margin: 1rem auto 0 auto;
+  color: rgb(226, 235, 255);
+  background-color: rgb(32, 25, 105);
+}
+
+#home-button:hover {
+  color: rgb(171, 187, 255);
+  background-color: rgb(64, 57, 132);
+  border-color: rgb(90, 90, 90);
+  cursor: pointer;
+}

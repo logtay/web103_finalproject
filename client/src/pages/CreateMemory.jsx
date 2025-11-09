@@ -1,3 +1,4 @@
+import "../css/CreateMemory.css";
 import { useNavigate } from "react-router-dom";
 import MemoryForm from "../components/MemoryForm.jsx";
 import MemoryAPI from "../services/MemoryAPI.js";
@@ -7,21 +8,17 @@ const CreateMemory = () => {
 
   // Function to upload the memory to the database
   const uploadMemory = async (formData) => {
-    try {
-      await MemoryAPI.createMemory(
-        formData.title,
-        formData.description,
-        formData.date,
-        formData.lovedOnes,
-        formData.tags,
-        formData.media
-      );
-
-      navigate("/");
-    } catch (error) {
-      console.log("Error uploading:", error);
-    }
+    await MemoryAPI.createMemory(
+      formData.title,
+      formData.description,
+      formData.date,
+      formData.lovedOnes,
+      formData.tags,
+      formData.media
+    );
+    navigate("/");
   };
+
   return (
     <MemoryForm
       title="Upload your memories"
@@ -34,6 +31,16 @@ const CreateMemory = () => {
       }}
       onSubmit={uploadMemory}
       submitLabel={"Upload Memory"}
+      secondaryButton={
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          id="home-button"
+        >
+          Back Home
+        </button>
+      }
     />
   );
 };

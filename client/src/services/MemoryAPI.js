@@ -19,6 +19,9 @@ async function createMemory(title, description, date, lovedOnes, tags, media) {
     formData.append("media", media);
     const options = {
       method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
       body: formData,
     };
     const response = await fetch("/api/memory", options);
@@ -40,6 +43,9 @@ async function updateMemory(title, description, date, lovedOnes, tags, media) {
     formData.append("media", media);
     const options = {
       method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
       body: formData,
     };
     const response = await fetch("/api/memory", options);
@@ -50,4 +56,20 @@ async function updateMemory(title, description, date, lovedOnes, tags, media) {
   }
 }
 
-export default { getMemory, createMemory, updateMemory };
+async function deleteMemory(id) {
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    const response = await fetch(`/api/memory/${id}`, options);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(`Error deleting memory: ${error}`);
+  }
+}
+
+export default { getMemory, createMemory, updateMemory, deleteMemory };

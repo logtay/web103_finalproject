@@ -1,22 +1,10 @@
-import UserForm from "../components/UserForm";
+import UserForm from "../components/UserForm.jsx";
+import UserAPI from "../services/UserAPI.js";
 
 const Register = () => {
   // Function to create a user
   const Signup = async (formData) => {
-    try {
-      await fetch(`/api/user`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
-        }),
-      });
-    } catch (error) {
-      console.log("Error creating user:", error);
-    }
+    await UserAPI.createUser(formData.username, formData.password);
   };
 
   return (
