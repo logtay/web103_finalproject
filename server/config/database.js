@@ -1,5 +1,5 @@
-import pg from 'pg';
-import 'dotenv/config';
+import pg from "pg";
+import "dotenv/config";
 
 const config = {
   user: process.env.PGUSER,
@@ -8,8 +8,9 @@ const config = {
   port: Number(process.env.PGPORT),
   database: process.env.PGDATABASE,
   ssl: {
-    rejectUnauthorized: false, 
+    rejectUnauthorized: false,
   },
 };
 
-export const pool = new pg.Pool(config);
+const pool = new pg.Pool(config);
+export default pool;
