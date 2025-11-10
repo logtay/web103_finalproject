@@ -1,5 +1,5 @@
 
-import { pool }  from "../config/database.js";
+import  pool  from "../config/database.js";
 
 const createTag = async (req, res) => {
   try {

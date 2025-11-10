@@ -66,10 +66,10 @@ const MemoryForm = ({
   const submitForm = async (event) => {
     event.preventDefault();
     // Check input
-    if (acceptedFiles.length === 0) {
-      alert("Please upload an image before submitting.");
-      return;
-    }
+    // if (acceptedFiles.length === 0) {
+    //   alert("Please upload an image before submitting.");
+    //   return;
+    // } Comment this out for now until we are ready for uploads
 
     console.log(formData.title);
     console.log(formData.description);
@@ -78,7 +78,7 @@ const MemoryForm = ({
     console.log(formData.tags);
     console.log(acceptedFiles[0]);
 
-    onSubmit({ ...formData, media: acceptedFiles[0] });
+    onSubmit({ ...formData, media: acceptedFiles[0] ? acceptedFiles[0] : null });
   };
 
   return (
@@ -96,7 +96,7 @@ const MemoryForm = ({
           {acceptedFiles.length > 0 ? (
             <p id="memory-file">{acceptedFiles[0].name}</p>
           ) : (
-            <p id="memory-file">Click/Drag to Upload Media</p>
+            <p id="memory-file">Click/Drag to Upload Media (Optional)</p>
           )}
         </div>
         <label htmlFor="memory-title">Title</label>
