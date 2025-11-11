@@ -27,7 +27,7 @@ Backend: PostgreSQL, and Node.js
 
 ## Features
 
-### Add a new memory
+### ✅ Add a new memory
 
 The user can create a new memory that they would like to save. They can add various details such as: title, the loved one's name the memory is related to, date, description, and an image or audio file. 
 
