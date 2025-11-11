@@ -1,56 +1,58 @@
+const BASE_URL = "http://localhost:3001/api/memory";
+
 async function getMemory(id) {
   try {
-    const response = await fetch(`/api/memory/${id}`);
-    const data = await response.json();
-    return data;
+    const response = await fetch(`${BASE_URL}/${id}`);
+    if (!response.ok) throw new Error("Failed to fetch memory");
+    return await response.json();
   } catch (error) {
     console.log(`Error fetching memory: ${error}`);
   }
 }
 
-async function createMemory(title, description, date, lovedOnes, tags, media) {
+async function getMemories() {
   try {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("date", date);
-    formData.append("lovedOnes", JSON.stringify(lovedOnes));
-    formData.append("tags", JSON.stringify(tags));
-    formData.append("media", media);
-    const options = {
+    const response = await fetch(BASE_URL);
+    if (!response.ok) throw new Error("Failed to fetch memories");
+    return await response.json();
+  } catch (error) {
+    console.log(`Error fetching memories: ${error}`);
+  }
+}
+
+async function createMemory(title, description, lovedOnes = []) {
+  try {
+    const body = JSON.stringify({
+      title,
+      description,
+      lovedOnes,
+      user_id: 1 // just testing for now with valid user id
+    });
+
+    const response = await fetch("http://localhost:3001/api/memory", {
       method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: formData,
-    };
-    const response = await fetch("/api/memory", options);
-    const data = await response.json();
-    return data;
+      headers: { "Content-Type": "application/json" },
+      body,
+    });
+
+    if (!response.ok) throw new Error("Failed to create memory");
+    return await response.json();
   } catch (error) {
     console.log(`Error creating memory: ${error}`);
   }
 }
 
-async function updateMemory(title, description, date, lovedOnes, tags, media) {
+
+async function updateMemory(id, title, description, lovedOnes = [], user_id = null) {
   try {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("date", date);
-    formData.append("lovedOnes", JSON.stringify(lovedOnes));
-    formData.append("tags", JSON.stringify(tags));
-    formData.append("media", media);
-    const options = {
+    const body = JSON.stringify({ title, description, lovedOnes, user_id });
+    const response = await fetch(`${BASE_URL}/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: formData,
-    };
-    const response = await fetch("/api/memory", options);
-    const data = await response.json();
-    return data;
+      headers: { "Content-Type": "application/json" },
+      body,
+    });
+    if (!response.ok) throw new Error("Failed to update memory");
+    return await response.json();
   } catch (error) {
     console.log(`Error updating memory: ${error}`);
   }
@@ -58,18 +60,12 @@ async function updateMemory(title, description, date, lovedOnes, tags, media) {
 
 async function deleteMemory(id) {
   try {
-    const options = {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-      },
-    };
-    const response = await fetch(`/api/memory/${id}`, options);
-    const data = await response.json();
-    return data;
+    const response = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
+    if (!response.ok) throw new Error("Failed to delete memory");
+    return await response.json();
   } catch (error) {
     console.log(`Error deleting memory: ${error}`);
   }
 }
 
-export default { getMemory, createMemory, updateMemory, deleteMemory };
+export default { getMemory, getMemories, createMemory, updateMemory, deleteMemory };
