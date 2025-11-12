@@ -26,7 +26,7 @@ We were able to make a lot of progress on both the front and the backend.
 
 ### 2. What were some challenges your group faced in this unit?
 
-It was hard to decide who was doing what. We were unsure of how to divide everything up and how to communicate it all on the Project Board in a way that made sense to the whole group. 
+It was hard to decide who was doing what. We were unsure of how to divide everything up and how to communicate it all on the Project Board in a way that made sense to the whole group. We also had to make minor changes to our table designs to better fit what we wanted our app to do.
 
 ### Did you finish all of your tasks in your sprint plan for this week? If you did not finish all of the planned tasks, how would you prioritize the remaining tasks on your list?
 
