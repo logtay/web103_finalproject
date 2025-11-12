@@ -29,9 +29,9 @@ Backend: PostgreSQL, and Node.js
 
 ### ✅ Add a new memory
 
-The user can create a new memory that they would like to save. They can add various details such as: title, the loved one's name the memory is related to, date, description, and an image or audio file. 
+The user can create a new memory that they would like to save. They can add various details such as: title, the loved one's name the memory is related to, description, and an image or audio file. 
 
-[gif goes here]
+<img src="https://github.com/logtay/web103_finalproject/blob/main/AddMemory.gif?raw=true" width="500">
 
 ### View all memories
 
