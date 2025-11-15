@@ -5,12 +5,13 @@ async function createUserTable() {
   try {
     await pool.query("DROP TABLE IF EXISTS users CASCADE");
     await pool.query(`
-      CREATE TABLE users (
-        id SERIAL PRIMARY KEY,
-        username VARCHAR(127) NOT NULL,
-        password VARCHAR(128) NOT NULL,
-        created_at TIMESTAMP NOT NULL DEFAULT NOW()
-      )
+      CREATE TABLE IF NOT EXISTS users (
+        id serial PRIMARY KEY,
+        githubid int NOT NULL,
+        username varchar(200) NOT NULL,
+        avatarurl varchar(500),
+        accesstoken varchar(500) NOT NULL
+      );
     `);
     console.log("✅ User table reset successfully.");
   } catch (err) {

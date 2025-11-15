@@ -1,26 +1,17 @@
-import UserAPI from "../services/UserAPI.js";
+import "../css/Login.css";
 
 const Login = () => {
-  // Function to sign in
-  async function signin(formData) {
-    const result = await UserAPI.verifyUser(
-      formData.username,
-      formData.password
-    );
-    if (result) {
-      alert("Signed in");
-    } else {
-      alert("Wrong password or username");
-    }
-  }
+  const AUTH_URL = `/api/auth/github`;
 
   return (
-    <UserForm
-      title={"Login to your account"}
-      onSubmit={signin}
-      submitLabel={"Login"}
-      isSignup={false}
-    />
+    <div className="login">
+      <center>
+        <h1>Login and start saving Memories!</h1>
+        <a href={AUTH_URL}>
+          <button id="login-button">Login via Github</button>
+        </a>
+      </center>
+    </div>
   );
 };
 

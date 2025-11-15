@@ -15,7 +15,7 @@ const createMemory = async (req, res) => {
         description,
         user_id || null,
         JSON.stringify(lovedOnes || []),
-        null
+        null,
       ]
     );
 
@@ -39,22 +39,16 @@ const getMemories = async (req, res) => {
 const updateMemory = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const { title, description, lovedOnes, user_id } = req.body;
+    const { title, description, lovedOnes } = req.body;
 
     const result = await pool.query(
       `
       UPDATE memories
-      SET title = $1, body = $2, user_id = $3, loved_one = $4
+      SET title = $1, body = $2, loved_one = $4
       WHERE id = $5
       RETURNING *
       `,
-      [
-        title,
-        description,
-        user_id || null,
-        JSON.stringify(lovedOnes || []),
-        id
-      ]
+      [title, description, user_id || null, JSON.stringify(lovedOnes || []), id]
     );
 
     if (!result.rows.length) {
@@ -88,14 +82,19 @@ const deleteMemory = async (req, res) => {
 const getMemoryById = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const results = await pool.query(
-      "SELECT * FROM memories WHERE id = $1",
-      [id]
-    );
+    const results = await pool.query("SELECT * FROM memories WHERE id = $1", [
+      id,
+    ]);
     res.status(200).json(results.rows[0]);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export default { createMemory, getMemories, updateMemory, deleteMemory, getMemoryById };
+export default {
+  createMemory,
+  getMemories,
+  updateMemory,
+  deleteMemory,
+  getMemoryById,
+};

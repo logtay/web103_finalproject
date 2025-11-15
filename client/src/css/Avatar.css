@@ -1,0 +1,22 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-img {
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .user-img {
+    height: 2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .user-img {
+    height: 1rem;
+  }
+}
