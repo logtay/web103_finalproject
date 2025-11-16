@@ -83,18 +83,17 @@ const MemoryForm = ({
           className={`file-drop-zone ${isDragActive ? "active" : ""}`}
         >
           <input {...getInputProps()} />
-          {isDragActive ? (
-            <p>Drop your file here...</p>
-          ) : (
-            <p>Click or Drag a file here</p>
+          {uploadedFile ? null : <p>Click or Drag a file here</p>}
+          {uploadedFile && (
+            <div className="preview">
+              <img
+                className="preview-image"
+                src={uploadedFile.previewUrl}
+                alt="preview"
+              />
+            </div>
           )}
         </div>
-        {uploadedFile && (
-          <div className="preview">
-            <h4>Image Preview</h4>
-            <img src={uploadedFile.previewUrl} alt="preview" />
-          </div>
-        )}
 
         <label htmlFor="memory-title">Title</label>
         <input
