@@ -5,8 +5,9 @@ const FilterButton = ({ name, onClick }) => {
   const [isSelected, setIsSelected] = useState(false);
 
   function handleClick() {
-    setIsSelected((prev) => !prev);
-    onClick(name);
+    const nextState = !isSelected;
+    setIsSelected(nextState);
+    onClick(name, nextState);
   }
 
   return (

@@ -54,16 +54,46 @@ const getMemories = async (req, res) => {
     const results = await pool.query(
       `
       SELECT
-          m.*,
-          COALESCE(json_agg(DISTINCT mt.tag_name) FILTER (WHERE mt.tag_name IS NOT NULL), '[]') AS tags,
-          COALESCE(json_agg(DISTINCT mlo.loved_one_name) FILTER (WHERE mlo.loved_one_name IS NOT NULL), '[]') AS lovedOnes
+        m.*,
+        COALESCE(json_agg(DISTINCT mlo.loved_one_name) FILTER (WHERE mlo.loved_one_name IS NOT NULL), '[]') AS lovedOnes,
+        COALESCE(json_agg(DISTINCT mt.tag_name) FILTER (WHERE mt.tag_name IS NOT NULL), '[]') AS tags
       FROM memories AS m
-        LEFT JOIN memory_tags AS mt ON mt.memory_id = m.id
-        LEFT JOIN memory_loved_ones mlo ON mlo.memory_id = m.id
-        WHERE m.user_id = $1
-        GROUP BY m.id;
+      LEFT JOIN memory_loved_ones mlo ON mlo.memory_id = m.id
+      LEFT JOIN memory_tags mt ON mt.memory_id = m.id
+      WHERE m.user_id = $1
+      GROUP BY m.id;
       `,
       [userId]
+    );
+
+    res.status(200).json(results.rows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getFilteredMemories = async (req, res) => {
+  try {
+    const userId = parseInt(req.query.userId);
+    const lovedOnes = JSON.parse(req.query.lovedOnes);
+    const tags = JSON.parse(req.query.tags);
+    const results = await pool.query(
+      `
+      SELECT
+        m.*,
+        COALESCE(json_agg(DISTINCT mlo.loved_one_name) FILTER (WHERE mlo.loved_one_name IS NOT NULL), '[]') AS lovedOnes,
+        COALESCE(json_agg(DISTINCT mt.tag_name) FILTER (WHERE mt.tag_name IS NOT NULL), '[]') AS tags
+      FROM memories AS m
+      LEFT JOIN memory_loved_ones mlo ON mlo.memory_id = m.id
+      LEFT JOIN memory_tags mt ON mt.memory_id = m.id
+      WHERE m.user_id = $1
+      GROUP BY m.id
+      HAVING 
+        ($2::text[] IS NULL OR $2::text[] <@ ARRAY_AGG(DISTINCT mlo.loved_one_name)) AND
+        ($3::text[] IS NULL OR $3::text[] <@ ARRAY_AGG(DISTINCT mt.tag_name))
+      `,
+      [userId, lovedOnes, tags]
     );
 
     res.status(200).json(results.rows);
@@ -214,6 +244,7 @@ const getMemoryById = async (req, res) => {
 export default {
   createMemory,
   getMemories,
+  getFilteredMemories,
   updateMemory,
   deleteMemory,
   getMemoryById,

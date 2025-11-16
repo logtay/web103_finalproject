@@ -18,6 +18,23 @@ async function getMemories(userId) {
   }
 }
 
+async function getFilteredMemories(userId, lovedOnes, tags) {
+  try {
+    const params = new URLSearchParams({
+      userId,
+      lovedOnes: JSON.stringify(lovedOnes),
+      tags: JSON.stringify(tags),
+    });
+    const response = await fetch(
+      `$/api/memories/filtered?${params.toString()}`
+    );
+    //if (!response.ok) throw new Error("Failed to fetch memories");
+    return await response.json();
+  } catch (error) {
+    console.log(`Error fetching filtered memories: ${error}`);
+  }
+}
+
 async function createMemory(
   userId,
   title,
@@ -46,7 +63,6 @@ async function createMemory(
     };
 
     const response = await fetch("/api/memories", options);
-    console.log(response);
     if (!response.ok) throw new Error("Failed to create memory");
     return await response.json();
   } catch (error) {
@@ -100,6 +116,7 @@ async function deleteMemory(id) {
 export default {
   getMemory,
   getMemories,
+  getFilteredMemories,
   createMemory,
   updateMemory,
   deleteMemory,

@@ -1,9 +1,17 @@
 import "../css/FilterPanel.css";
+import { useState } from "react";
 import FilterButton from "./FilterButton";
 
 const FilterPanel = ({ title, options, onChange }) => {
-  function handleSelection() {
-    onChange();
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  function handleSelection(optionName, isSelected) {
+    setSelectedOptions((prev) =>
+      isSelected
+        ? [...prev, optionName]
+        : prev.filter((option) => option !== optionName)
+    );
+    onChange(selectedOptions);
   }
 
   return (
