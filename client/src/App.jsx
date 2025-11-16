@@ -31,15 +31,15 @@ function App() {
     { path: "/", element: user && user.id ? <ReadMemories /> : <Login /> },
     {
       path: "/memory/new",
-      element: user && user.id ? <CreateMemory /> : <Login />,
+      element: user && user.id ? <CreateMemory userId={user.id} /> : <Login />,
     },
     {
       path: "/memory/:id",
-      element: user && user.id ? <MemoryDetail /> : <Login />,
+      element: user && user.id ? <MemoryDetail userId={user.id} /> : <Login />,
     },
     {
       path: "/memory/:id/edit",
-      element: user && user.id ? <EditMemory /> : <Login />,
+      element: user && user.id ? <EditMemory userId={user.id} /> : <Login />,
     },
     {
       path: "/login",

@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 // change routes to match frontend
 app.use("/users", usersRouter);
 app.use("/tags", tagsRouter);
-app.use("/memory", memoriesRouter);
+app.use("/memories", memoriesRouter);
 app.use("/auth", authRouter);
 
 const PORT = 3001;

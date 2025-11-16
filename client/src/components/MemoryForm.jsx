@@ -1,28 +1,48 @@
 import "../css/MemoryForm.css";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import CreatableSelect from "react-select/creatable";
+import Select from "react-select/creatable";
+import { lovedOnesOptions, tagsOptions } from "../data/data";
 
-const MemoryForm = ({ title, initData, onSubmit, submitLabel, secondaryButton }) => {
+const MemoryForm = ({
+  title,
+  initData,
+  onSubmit,
+  submitLabel,
+  secondaryButton,
+}) => {
   const [formData, setFormData] = useState({
     title: initData.title || "",
     description: initData.description || "",
+    date: initData.date,
     lovedOnes: initData.lovedOnes || [],
-    tags: initData.tags || [], // Tags not implemented yet
+    tags: initData.tags || [],
   });
+  const [uploadedFile, setUploadedFile] = useState(null);
 
-  // File upload doesnt work yet
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+    if (!file) return;
+
+    setUploadedFile({
+      file,
+      previewUrl: URL.createObjectURL(file),
+    });
+  }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { "image/*": [] },
     multiple: false,
-    onDrop: () => {}, // do nothing
+    onDrop,
   });
 
   const selectStyles = {
     control: (provided, state) => ({
       ...provided,
       padding: "0.5rem",
-      backgroundColor: state.isFocused ? "rgb(210,210,210)" : "rgb(230,230,230)",
+      backgroundColor: state.isFocused
+        ? "rgb(210,210,210)"
+        : "rgb(230,230,230)",
       border: "2px solid",
       borderColor: state.isFocused ? "rgb(45,45,45)" : "gray",
       borderRadius: "8px",
@@ -33,19 +53,24 @@ const MemoryForm = ({ title, initData, onSubmit, submitLabel, secondaryButton })
     }),
     valueContainer: (provided) => ({ ...provided, padding: 0 }),
     input: (provided) => ({ ...provided, margin: 0, padding: 0 }),
-    multiValue: (provided) => ({ ...provided, backgroundColor: "rgba(0,0,0,0.1)", borderRadius: "6px", padding: "2px 4px" }),
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: "rgba(0,0,0,0.1)",
+      borderRadius: "6px",
+      padding: "2px 4px",
+    }),
     multiValueLabel: (provided) => ({ ...provided, fontSize: "0.9rem" }),
   };
 
   const submitForm = (event) => {
     event.preventDefault();
-    // We are not sending tags to backend yet
-    const payload = {
-      title: formData.title,
-      description: formData.description,
-      lovedOnes: formData.lovedOnes || [],
-    };
-    onSubmit(payload);
+    {
+      /*if (acceptedFiles.length === 0) {
+      alert("Please upload an image before submitting.");
+      return;
+    }*/
+    }
+    onSubmit({ ...formData, media: uploadedFile || null });
   };
 
   return (
@@ -56,41 +81,47 @@ const MemoryForm = ({ title, initData, onSubmit, submitLabel, secondaryButton })
         <div
           {...getRootProps()}
           className={`file-drop-zone ${isDragActive ? "active" : ""}`}
-          style={{
-            marginBottom: "1rem",
-            padding: "1rem",
-            border: "2px dashed gray",
-            borderRadius: "8px",
-            textAlign: "center",
-            color: "#555",
-          }}
         >
           <input {...getInputProps()} />
-          {isDragActive ? <p>Drop your file here...</p> : <p>Click or Drag a file here (Optional)</p>}
+          {isDragActive ? (
+            <p>Drop your file here...</p>
+          ) : (
+            <p>Click or Drag a file here</p>
+          )}
         </div>
+        {uploadedFile && (
+          <div className="preview">
+            <h4>Image Preview</h4>
+            <img src={uploadedFile.previewUrl} alt="preview" />
+          </div>
+        )}
 
         <label htmlFor="memory-title">Title</label>
         <input
           type="text"
           id="memory-title"
           value={formData.title}
-          onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, title: e.target.value }))
+          }
           placeholder="Enter a title"
           maxLength={128}
           required
         />
 
-        <label htmlFor="memory-loved-ones">Loved Ones Names</label>
-        <CreatableSelect
-          inputId="memory-loved-ones"
-          isMulti
-          isSearchable
-          placeholder="Tag your loved ones"
-          menuPlacement="auto"
-          maxMenuHeight="30vh"
-          styles={selectStyles}
-          value={formData.lovedOnes}
-          onChange={(selected) => setFormData(prev => ({ ...prev, lovedOnes: selected }))}
+        <label htmlFor="memory-date">Date</label>
+        <input
+          type="date"
+          id="memory-date"
+          name="date"
+          value={formData.date.toISOString().split("T")[0]}
+          onChange={(e) =>
+            setFormData((prev) => ({
+              ...prev,
+              date: e.target.value ? new Date(e.target.value) : null,
+            }))
+          }
+          required
         />
 
         <label htmlFor="memory-description">Description</label>
@@ -98,27 +129,50 @@ const MemoryForm = ({ title, initData, onSubmit, submitLabel, secondaryButton })
           id="memory-description"
           placeholder="Give some details"
           value={formData.description}
-          onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, description: e.target.value }))
+          }
           maxLength={500}
         />
 
-        {/* Keep tags visible but do NOT send them in payload */}
+        <label htmlFor="memory-loved-ones">Loved Ones Names</label>
+        <Select
+          inputId="memory-loved-ones"
+          isMulti
+          isSearchable
+          options={lovedOnesOptions}
+          placeholder="Tag your loved ones"
+          menuPlacement="auto"
+          minMenuHeight="30vh"
+          maxMenuHeight="50vh"
+          styles={selectStyles}
+          value={formData.lovedOnes}
+          onChange={(selected) =>
+            setFormData((prev) => ({ ...prev, lovedOnes: selected }))
+          }
+        />
         <label htmlFor="memory-tags">Tags</label>
-        <CreatableSelect
+        <Select
           inputId="memory-tags"
           isMulti
           isSearchable
+          options={tagsOptions}
           placeholder="Tag your memories"
           menuPlacement="auto"
-          maxMenuHeight="30vh"
+          minMenuHeight="30vh"
+          maxMenuHeight="50vh"
           styles={selectStyles}
           value={formData.tags}
-          onChange={(selected) => setFormData(prev => ({ ...prev, tags: selected }))}
+          onChange={(selected) =>
+            setFormData((prev) => ({ ...prev, tags: selected }))
+          }
         />
 
         <div className="memory-form-buttons">
           {secondaryButton}
-          <button id="upload-button" type="submit">{submitLabel}</button>
+          <button id="upload-button" type="submit">
+            {submitLabel}
+          </button>
         </div>
       </form>
     </div>

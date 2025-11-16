@@ -4,7 +4,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import MemoryForm from "../components/MemoryForm.jsx";
 import MemoryAPI from "../services/MemoryAPI.js";
 
-const EditMemory = () => {
+const EditMemory = ({ userId }) => {
   const navigate = useNavigate();
   const id = useParams();
   const location = useLocation();
@@ -21,22 +21,23 @@ const EditMemory = () => {
       setMemory(location.state.memory);
     } else {
       const fetchMemory = async () => {
-        const data = await MemoryAPI.getMemory(id);
+        await MemoryAPI.getMemory(userId, id);
         //setMemory(data);
       };
       fetchMemory();
     }
-  }, [id, location.state]);
+  }, [id, location.state, userId]);
 
   // Function to update the memory
   const updateMemory = async (formData) => {
     await MemoryAPI.updateMemory(
+      id,
       formData.title,
       formData.description,
       formData.date,
+      formData.media,
       formData.lovedOnes,
-      formData.tags,
-      formData.media
+      formData.tags
     );
     navigate(`/memory/:${id}`);
   };
