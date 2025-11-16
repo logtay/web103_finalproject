@@ -1,0 +1,19 @@
+.filter-button {
+  background-color: rgb(126, 126, 126);
+  color: rgb(255, 255, 255);
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.filter-button:hover,
+.selected {
+  background-color: rgb(80, 80, 80);
+  cursor: pointer;
+}
+
+@media screen and (max-width: px) {
+  .filter-button {
+    padding: 0.3rem 0.7rem;
+  }
+}

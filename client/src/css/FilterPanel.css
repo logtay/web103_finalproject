@@ -1,0 +1,20 @@
+.filter-panel-container {
+  background-color: rgb(170, 170, 170);
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 15px;
+  flex: 1;
+}
+
+.filter-panel-title {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.options-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
