@@ -1,0 +1,35 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-panels {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  padding: 0 2rem;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .filter-panels {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+#filter-button {
+  padding: 0.5rem 2.5rem;
+  border-radius: 12px;
+  color: white;
+  background-color: #35305f;
+  border: 2px solid black;
+  margin: 1rem 1rem 0 auto;
+}
+
+#filter-button:hover {
+  cursor: pointer;
+  background-color: #262651;
+}

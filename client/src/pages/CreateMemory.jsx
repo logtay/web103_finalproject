@@ -3,18 +3,19 @@ import { useNavigate } from "react-router-dom";
 import MemoryForm from "../components/MemoryForm.jsx";
 import MemoryAPI from "../services/MemoryAPI.js";
 
-const CreateMemory = () => {
+const CreateMemory = ({ userId }) => {
   const navigate = useNavigate();
 
   // Function to upload the memory to the database
   const uploadMemory = async (formData) => {
     await MemoryAPI.createMemory(
+      userId,
       formData.title,
       formData.description,
       formData.date,
+      formData.media,
       formData.lovedOnes,
-      formData.tags,
-      formData.media
+      formData.tags
     );
     navigate("/");
   };
