@@ -26,12 +26,13 @@ const MemoryForm = ({
 
     setUploadedFile({
       file,
-      previewUrl: URL.createObjectURL(file),
+      previewUrl: file.type.startsWith("image/")
+        ? URL.createObjectURL(file)
+        : null,
     });
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: { "image/*": [] },
     multiple: false,
     onDrop,
   });
@@ -64,12 +65,6 @@ const MemoryForm = ({
 
   const submitForm = (event) => {
     event.preventDefault();
-    {
-      /*if (acceptedFiles.length === 0) {
-      alert("Please upload an image before submitting.");
-      return;
-    }*/
-    }
     onSubmit({ ...formData, media: uploadedFile || null });
   };
 
@@ -83,14 +78,27 @@ const MemoryForm = ({
           className={`file-drop-zone ${isDragActive ? "active" : ""}`}
         >
           <input {...getInputProps()} />
-          {uploadedFile ? null : <p>Click or Drag a file here</p>}
+          {!uploadedFile && <p>Click or Drag a file here</p>}
           {uploadedFile && (
             <div className="preview">
-              <img
-                className="preview-image"
-                src={uploadedFile.previewUrl}
-                alt="preview"
-              />
+              {uploadedFile.previewUrl ? (
+                <img
+                  className="preview-image"
+                  src={uploadedFile.previewUrl}
+                  alt="preview"
+                />
+              ) : (
+                <p>
+                  File ready to upload: <strong>{uploadedFile.file.name}</strong>
+                </p>
+              )}
+              <button
+                type="button"
+                className="remove-file-button"
+                onClick={() => setUploadedFile(null)}
+              >
+                Remove File
+              </button>
             </div>
           )}
         </div>
@@ -150,6 +158,7 @@ const MemoryForm = ({
             setFormData((prev) => ({ ...prev, lovedOnes: selected }))
           }
         />
+
         <label htmlFor="memory-tags">Tags</label>
         <Select
           inputId="memory-tags"
