@@ -39,13 +39,13 @@ The user can view a feed of all the memories that they have added so far. Each m
 
 [gif goes here]
 
-### Delete a memory
+### ✅ Delete a memory
 
 If a user no longer wishes to keep a memory, they can delete it and the change is immediately shown in the interface.
 
 [gif goes here]
 
-### Edit a memory
+### ✅ Edit a memory
 
 Users can update or change any details of a memory that they have already created. 
 
