@@ -5,6 +5,7 @@ const createMemory = async (req, res) => {
   try {
     const { userId, title, description, date, media, lovedOnes, tags } =
       req.body;
+
     await client.query("BEGIN");
 
     const memoryResult = await client.query(
@@ -116,8 +117,8 @@ const updateMemory = async (req, res) => {
         UPDATE memories
         SET title = $1,
             body  = $2,
-            date = $3
-            file_path = $4,
+            date = $3,
+            file_path = $4
         WHERE id = $5
         RETURNING *;
       `,
@@ -139,7 +140,7 @@ const updateMemory = async (req, res) => {
       [id]
     );
 
-    if (lovedOnes.length > 0) {
+    if (lovedOnes && lovedOnes.length > 0) {
       const lovedValues = lovedOnes.map((lo) => `(${id}, '${lo}')`);
 
       const lovedQuery = `
@@ -158,7 +159,7 @@ const updateMemory = async (req, res) => {
       [id]
     );
 
-    if (tags.length > 0) {
+    if (tags && tags.length > 0) {
       const tagValues = tags.map((tag) => `(${id}, '${tag}')`);
 
       const tagQuery = `
@@ -182,37 +183,38 @@ const updateMemory = async (req, res) => {
 };
 
 const deleteMemory = async (req, res) => {
+  const client = await pool.connect();
   try {
     const id = parseInt(req.params.id);
-    const results = await pool.query(
+    if (isNaN(id)) {
+      return res.status(400).json({ error: "Invalid memory ID" });
+    }
+
+    await client.query("BEGIN");
+
+    await client.query("DELETE FROM memory_loved_ones WHERE memory_id = $1", [
+      id,
+    ]);
+    await client.query("DELETE FROM memory_tags WHERE memory_id = $1", [id]);
+
+    const results = await client.query(
       "DELETE FROM memories WHERE id = $1 RETURNING *",
       [id]
     );
 
     if (!results.rows.length) {
+      await client.query("ROLLBACK");
       return res.status(404).json({ error: "Memory not found" });
     }
 
-    await client.query(
-      `
-      DELETE FROM memory_loved_ones
-      WHERE memory_id = $1;
-      `,
-      [id]
-    );
-
-    await client.query(
-      `
-        DELETE FROM memory_tags
-        WHERE memory_id = $1;
-      `,
-      [id]
-    );
-
+    await client.query("COMMIT");
     res.status(200).json(results.rows[0]);
   } catch (error) {
+    await client.query("ROLLBACK");
     console.log(error);
     res.status(409).json({ error: error.message });
+  } finally {
+    client.release();
   }
 };
 

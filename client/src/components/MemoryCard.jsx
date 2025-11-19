@@ -1,34 +1,21 @@
-
 import "../css/MemoryCard.css";
-import { FiFile } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
-const MemoryCard = ({ memory }) => {
-  const { title, body, date, tags, lovedones, file_path } = memory;
-
+const MemoryCard = ({ id, title, body, date, file_path }) => {
   return (
-    <div className="memory-card">
-      {file_path && (
-        <div className="memory-card-file">
-          <FiFile size={40} />
-        </div>
-      )}
+    <Link className="memory-card" to={`/memory/${id}`}>
+      <img className="memory-card-image" src={file_path} alt={title} />
 
       <div className="memory-card-content">
-        <h3 className="memory-card-title">{title}</h3>
-        <p className="memory-card-description">{body}</p>
-
-        <div className="memory-card-footer">
-          <span className="memory-card-date">{new Date(date).toLocaleDateString()}</span>
-          <div className="memory-card-tags">
-            {tags.map((tag, i) => (
-              <span key={i} className="memory-tag">
-                {tag}
-              </span>
-            ))}
-          </div>
+        <div className="memory-card-text-container">
+          <h3 className="memory-card-title">{title}</h3>
+          <span className="memory-card-date">
+            {new Date(date).toLocaleDateString()}
+          </span>
         </div>
+        <p className="memory-card-description">{body}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

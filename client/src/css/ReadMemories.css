@@ -33,3 +33,13 @@
   cursor: pointer;
   background-color: #262651;
 }
+
+.memories-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  margin-top: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}

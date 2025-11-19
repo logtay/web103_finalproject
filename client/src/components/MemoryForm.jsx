@@ -1,5 +1,5 @@
 import "../css/MemoryForm.css";
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import Select from "react-select/creatable";
 import { lovedOnesOptions, tagsOptions } from "../data/data";
@@ -14,11 +14,52 @@ const MemoryForm = ({
   const [formData, setFormData] = useState({
     title: initData.title || "",
     description: initData.description || "",
-    date: initData.date,
+    date: initData.date || new Date(),
+    file: initData.file_path || null,
     lovedOnes: initData.lovedOnes || [],
     tags: initData.tags || [],
   });
-  const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(formData.file);
+  const [availableLovedOnesOptions, setAvailableLovedOnesOptions] =
+    useState(lovedOnesOptions);
+  const [availableTagOptions, setAvailableTagOptions] = useState(tagsOptions);
+
+  useEffect(() => {
+    setFormData(initData);
+    setUploadedFile(initData.file);
+    setAvailableLovedOnesOptions(
+      lovedOnesOptions.filter(
+        (option) =>
+          !initData.lovedOnes.some(
+            (selected) => selected.value === option.value
+          )
+      )
+    );
+    setAvailableTagOptions(
+      tagsOptions.filter(
+        (option) =>
+          !initData.tags.some((selected) => selected.value === option.value)
+      )
+    );
+  }, [initData]);
+
+  const uploadFile = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${
+        import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+      }/auto/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    return await res.json();
+  };
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -63,9 +104,14 @@ const MemoryForm = ({
     multiValueLabel: (provided) => ({ ...provided, fontSize: "0.9rem" }),
   };
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
-    onSubmit({ ...formData, media: uploadedFile || null });
+    if (!uploadedFile) {
+      alert("Require an image!");
+      return;
+    }
+    const mediaUrl = await uploadFile(uploadedFile.file);
+    onSubmit({ ...formData, media: mediaUrl.secure_url });
   };
 
   return (
@@ -89,19 +135,22 @@ const MemoryForm = ({
                 />
               ) : (
                 <p>
-                  File ready to upload: <strong>{uploadedFile.file.name}</strong>
+                  File ready to upload:{" "}
+                  <strong>{uploadedFile.file.name}</strong>
                 </p>
               )}
-              <button
-                type="button"
-                className="remove-file-button"
-                onClick={() => setUploadedFile(null)}
-              >
-                Remove File
-              </button>
             </div>
           )}
         </div>
+        {uploadedFile && (
+          <button
+            type="button"
+            id="remove-file-button"
+            onClick={() => setUploadedFile(null)}
+          >
+            Remove File
+          </button>
+        )}
 
         <label htmlFor="memory-title">Title</label>
         <input
@@ -112,7 +161,7 @@ const MemoryForm = ({
             setFormData((prev) => ({ ...prev, title: e.target.value }))
           }
           placeholder="Enter a title"
-          maxLength={128}
+          maxLength={50}
           required
         />
 
@@ -146,8 +195,8 @@ const MemoryForm = ({
         <Select
           inputId="memory-loved-ones"
           isMulti
-          isSearchable
-          options={lovedOnesOptions}
+          isSearchable={false}
+          options={availableLovedOnesOptions}
           placeholder="Tag your loved ones"
           menuPlacement="auto"
           minMenuHeight="30vh"
@@ -163,8 +212,8 @@ const MemoryForm = ({
         <Select
           inputId="memory-tags"
           isMulti
-          isSearchable
-          options={tagsOptions}
+          isSearchable={false}
+          options={availableTagOptions}
           placeholder="Tag your memories"
           menuPlacement="auto"
           minMenuHeight="30vh"

@@ -35,7 +35,7 @@ async function createMemoryTable() {
         title VARCHAR(127) NOT NULL,
         body TEXT,
         date TIMESTAMP NOT NULL,
-        file_path TEXT,
+        file_path TEXT NOT NULL,
         created_at TIMESTAMP NOT NULL DEFAULT NOW(),
         user_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL
       )

@@ -1,27 +1,26 @@
-import "../css/MemoryForm.css";
+import "../css/MemoryDetails.css";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import MemoryAPI from "../services/MemoryAPI.js";
 
 const MemoryDetail = ({ userId }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [memory, setMemory] = useState(null);
 
   useEffect(() => {
     const fetchMemory = async () => {
       const data = await MemoryAPI.getMemory(userId, id);
-      setMemory(data || null);
+      setMemory(data);
     };
     fetchMemory();
   }, [id, userId]);
 
   if (!memory) return <div>Loading memory…</div>;
 
-  const formatDateForInput = (dateString) => {
+  const formatDate = (dateString) => {
     if (!dateString) return "";
     const d = new Date(dateString);
-    return d.toISOString().split("T")[0];
+    return d.toLocaleDateString();
   };
 
   const isImage = (path) => {
@@ -30,97 +29,81 @@ const MemoryDetail = ({ userId }) => {
   };
 
   return (
-    <div className="create-memory-container">
-      <form className="create-memory-form">
-        <h2 id="memory-form-title">Memory Details</h2>
+    <div className="memory-detail-container">
+      <h2>Memory Details</h2>
 
-        <div className="file-drop-zone">
-          {memory.file_path ? (
-            <div className="preview">
-              {isImage(memory.file_path) ? (
-                <img
-                  className="preview-image"
-                  src={memory.file_path}
-                  alt={memory.title}
-                />
-              ) : (
-                <p>
-                  File: <a href={memory.file_path}>{memory.file_path}</a>
-                </p>
-              )}
-            </div>
+      {memory.file_path && (
+        <div className="memory-detail-media">
+          {isImage(memory.file_path) ? (
+            <img
+              className="memory-detail-image"
+              src={memory.file_path}
+              alt={memory.title}
+            />
           ) : (
-            <p>No file attached</p>
+            <p>
+              File: <a href={memory.file_path}>{memory.file_path}</a>
+            </p>
           )}
         </div>
+      )}
 
-        <label htmlFor="memory-title">Title</label>
-        <input
-          type="text"
-          id="memory-title"
-          value={memory.title || ""}
-          readOnly
-        />
+      <div className="memory-detail-section">
+        <h3>Title</h3>
+        <p>{memory.title || "-"}</p>
+      </div>
 
-        <label htmlFor="memory-date">Date</label>
-        <input
-          type="date"
-          id="memory-date"
-          name="date"
-          value={formatDateForInput(memory.date)}
-          readOnly
-        />
+      <div className="memory-detail-section">
+        <h3>Date</h3>
+        <p>{formatDate(memory.date)}</p>
+      </div>
 
-        <label htmlFor="memory-description">Description</label>
-        <textarea
-          id="memory-description"
-          placeholder="Give some details"
-          value={memory.body || ""}
-          readOnly
-        />
+      <div className="memory-detail-section">
+        {memory.body && (
+          <>
+            <h3>Description</h3>
+            <p>{memory.body || "-"}</p>
+          </>
+        )}
+      </div>
 
-        <label> Loved Ones </label>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          {(memory.lovedOnes || []).map((lo, i) => (
-            <span
-              key={i}
-              style={{
-                backgroundColor: "rgba(0,0,0,0.05)",
-                padding: "4px 8px",
-                borderRadius: "6px",
-                border: "1px solid rgba(0,0,0,0.08)",
-                fontSize: "0.95rem",
-              }}
-            >
-              {lo}
-            </span>
-          ))}
-        </div>
+      <div className="memory-detail-section">
+        {memory.lovedones && memory.lovedones.length > 0 && (
+          <>
+            <h3>Loved Ones</h3>
+            <div className="memory-detail-tags">
+              {(memory.lovedones || []).map((lo, i) => (
+                <span key={i} className="memory-detail-tag">
+                  {lo}
+                </span>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
 
-        <label> Tags </label>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          {(memory.tags || []).map((tag, i) => (
-            <span
-              key={i}
-              style={{
-                backgroundColor: "rgba(0,0,0,0.05)",
-                padding: "4px 8px",
-                borderRadius: "6px",
-                border: "1px solid rgba(0,0,0,0.08)",
-                fontSize: "0.95rem",
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="memory-form-buttons">
-          <button type="button" onClick={() => navigate(-1)}>
-            Back
-          </button>
-        </div>
-      </form>
+      <div className="memory-detail-section">
+        {memory.tags && memory.tags.length > 0 && (
+          <>
+            <h3>Tags</h3>
+            <div className="memory-detail-tags">
+              {memory.tags.map((tag, i) => (
+                <span key={i} className="memory-detail-tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+      <div className="memory-detail-buttons">
+        <Link id="memory-detail-home-button" to="/">
+          Back
+        </Link>
+        <Link id="memory-detail-edit-button" to={`/memory/${id}/edit`}>
+          Edit
+        </Link>
+      </div>
     </div>
   );
 };
