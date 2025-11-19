@@ -28,7 +28,10 @@ function App() {
   }
 
   let element = useRoutes([
-    { path: "/", element: user && user.id ? <ReadMemories /> : <Login /> },
+    {
+      path: "/",
+      element: user && user.id ? <ReadMemories userId={user.id} /> : <Login />,
+    },
     {
       path: "/memory/new",
       element: user && user.id ? <CreateMemory userId={user.id} /> : <Login />,

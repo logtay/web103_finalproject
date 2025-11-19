@@ -53,6 +53,25 @@
   object-fit: contain;
 }
 
+#remove-file-button {
+  flex: 1;
+  height: 100%;
+  padding: 0.5rem 1.5rem;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin: 1rem auto 0 auto;
+  color: white;
+  background-color: rgb(181, 32, 32);
+}
+
+#remove-file-button:hover {
+  background-color: rgb(222, 0, 0);
+  border-color: rgb(90, 90, 90);
+  cursor: pointer;
+}
+
 #memory-file {
   padding: 0.5rem 0;
   margin: 0;

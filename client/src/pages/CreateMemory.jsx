@@ -6,7 +6,6 @@ import MemoryAPI from "../services/MemoryAPI.js";
 const CreateMemory = ({ userId }) => {
   const navigate = useNavigate();
 
-  // Function to upload the memory to the database
   const uploadMemory = async (formData) => {
     await MemoryAPI.createMemory(
       userId,
@@ -17,6 +16,7 @@ const CreateMemory = ({ userId }) => {
       formData.lovedOnes,
       formData.tags
     );
+
     navigate("/");
   };
 
@@ -27,18 +27,14 @@ const CreateMemory = ({ userId }) => {
         title: "",
         description: "",
         date: new Date(),
+        file: null,
         lovedOnes: [],
         tags: [],
       }}
       onSubmit={uploadMemory}
       submitLabel={"Upload Memory"}
       secondaryButton={
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-          id="home-button"
-        >
+        <button type="button" id="home-button" onClick={() => navigate("/")}>
           Back Home
         </button>
       }

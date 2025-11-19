@@ -10,7 +10,7 @@ async function getMemory(userId, id) {
 
 async function getMemories(userId) {
   try {
-    const response = await fetch(`$/api/memories?userId=${userId}`);
+    const response = await fetch(`/api/memories?userId=${userId}`);
     //if (!response.ok) throw new Error("Failed to fetch memories");
     return await response.json();
   } catch (error) {
@@ -79,22 +79,23 @@ async function updateMemory(
   lovedOnes,
   tags
 ) {
-  const selectedLovedOnes = lovedOnes.map((lo) => lo.label);
-  const selectedTags = tags.map((tag) => tag.label);
+  lovedOnes = lovedOnes.map((lo) => lo.label);
+  tags = tags.map((tag) => tag.label);
   try {
     const body = JSON.stringify({
       title,
       description,
       date,
       media,
-      selectedLovedOnes,
-      selectedTags,
+      lovedOnes,
+      tags,
     });
     const options = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: body,
     };
+
     const response = await fetch(`/api/memories/${id}`, options);
     //if (!response.ok) throw new Error("Failed to update memory");
     return await response.json();

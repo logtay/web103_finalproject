@@ -1,0 +1,62 @@
+.memory-card {
+  background: #f1f2f4;
+  border-radius: 18px;
+  width: 30%;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  text-decoration: none;
+}
+
+.memory-card:hover {
+  transform: translateY(-4px);
+}
+
+.memory-card-image {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.memory-card-content {
+  height: 30%;
+  padding: 0.25rem 0.75rem;
+}
+
+.memory-card-text-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.memory-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+  text-decoration: underline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.memory-card-date {
+  font-size: 0.9rem;
+  color: #444;
+  margin-left: auto;
+}
+
+.memory-card-description {
+  font-size: 0.8rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
